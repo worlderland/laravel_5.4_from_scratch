@@ -11,13 +11,29 @@
 |
 */
 
-Route::get('/', function () {
+use Illuminate\Support\Facades\DB;
 
-    $tasks = [
-        'Go to the store',
-        'Finish my work',
-        'Clean the house'
-    ];
+//Working function
+// Route::get('/', function () {
 
-    return view('welcome', compact('tasks'));
+//     $tasks = DB::table('tasks')->latest()->get(); //DB query to fetch data from database (in this case table tasks)
+
+//     return view('welcome', compact('tasks'));
+// });
+
+Route::get('/tasks', function () {
+
+    $tasks = DB::table('tasks')->latest()->get(); //DB query to fetch data from database (in this case table tasks)
+
+    return view('tasks.index', compact('tasks'));
+});
+
+
+Route::get('/tasks/{task}', function ($id) {
+
+    $task = DB::table('tasks')->find($id);
+
+    // dd($task); die and dump function, Laravel helper
+
+    return view('tasks.show', compact('task'));
 });

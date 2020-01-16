@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome.Blade</title>
+    <title>Index.Blade</title>
 </head>
 
 <body>
     <ul>
         @foreach ($tasks as $task)
 
-            <li>{{ $task->body }}</li>
+            <li>
+                <a href="/tasks/{{ $task->id }}">
+                    {{ $task->body }}
+                </a>
+            </li>
 
         @endforeach
     </ul>
